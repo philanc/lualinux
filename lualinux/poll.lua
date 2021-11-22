@@ -37,12 +37,12 @@ poll.POLLINVAL = 0x20
 -- a pollfd struct is encoded as:   (fd << 32 | events << 16 | revents)
 -- (see 'man 2 poll')
 
-function poll.makepfd(fd, events)
+function poll.encode(fd, events)
 	-- return a pollfd struct as a Lua integer
 	return (fd << 32) | (events << 16)
 end
 
-function poll.parsepfd(pfd)
+function poll.decode(pfd)
 	-- parse an encoded pollfd struct and return fd, events, revents
 	local fd, events, revents
 	fd = pfd >> 32

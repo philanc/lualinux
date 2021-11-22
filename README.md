@@ -89,7 +89,7 @@ getnameinfo(sockaddr) => host, port
 
 ```
 
-**Examples** can be found in the `util` and `test` subdirectories. They contain various Lua functions offering a more convenient API for some Linux functionality, and minimal tests for these functions. 
+**Examples** can be found in the `lualinux` and `test` subdirectories. They contain various Lua functions offering a more convenient API for some Linux functionality, and minimal tests for these functions. 
 
 
 ### License
