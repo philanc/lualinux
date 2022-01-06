@@ -509,12 +509,18 @@ static int ll_symlink(lua_State *L) {
 }
 
 static int ll_mkdir(lua_State *L) {
+	// lua api: mkdir(dirname [, mode])
+	// default mode for the new directory is 0700, (ie rwx------)
+	// Note: mode is modified by the current process umask:
+	//    actual mode = mode & ~umask & 0777
+	// (see the mkdir(2) man page)
 	const char *pname = luaL_checkstring(L, 1);
-	int mode = luaL_optinteger(L, 2, 0);
+	int mode = luaL_optinteger(L, 2, 0700); 
 	return int_or_errno(L, mkdir(pname, mode));
 }
 
 static int ll_rmdir(lua_State *L) { 
+	// lua api: rmdir(dirname)
 	const char *pname = luaL_checkstring(L, 1);
 	return int_or_errno(L, rmdir(pname));
 }
