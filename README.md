@@ -16,13 +16,14 @@ Completeness, POSIX compliance, support of other Unix OSes are not an objective.
 ### Available functions
 
 ```
+errno() => errno value
+strerror(errnum) => err_msg
+
 getpid() =>  process id
 getppid() => parent process id
 geteuid() => effective process uid
 getegid() => effective process gid
 getcwd() =>  current dir pathname
-
-errno() => errno value
 
 chdir(pathname)
 setenv(varname, value)

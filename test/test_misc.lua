@@ -38,6 +38,7 @@ function test_procinfo()
 		r = r or line:match("PATH=.*/usr/bin")
 	end
 	assert(r)
+	assert(lualinux.strerror(13) == "Permission denied")
 	print("test_procinfo: ok.")
 end
 

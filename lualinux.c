@@ -110,6 +110,10 @@ static int ll_errno(lua_State *L) {
 	RET_INT(errno);
 }
 
+static int ll_strerror(lua_State *L) {
+	RET_STRZ(strerror(luaL_checkinteger(L, 1)));
+}
+
 static int ll_getcwd(lua_State *L) { 
 	char buf[4096];
 	char *p = getcwd(buf, 4096);
@@ -513,7 +517,7 @@ static int ll_mount(lua_State *L) {
 	// src, dest, fstype and data are strings, flags is int.
 	// flags is optional. default value is 0 (rw).
 	// data is optional. defualt value is an empty string.
-	// return true or nil, errno
+	// return 0 or nil, errno
 	const char *src = luaL_checkstring(L, 1);
 	const char *dest = luaL_checkstring(L, 2);
 	const char *fstype = luaL_checkstring(L, 3);
@@ -523,7 +527,7 @@ static int ll_mount(lua_State *L) {
 }
 
 static int ll_umount(lua_State *L) {
-	// lua api: umount(dest) => true | nil, errno
+	// lua api: umount(dest) => 0 | nil, errno
 	// dest is a string
 	const char *dest = luaL_checkstring(L, 1);
 	return int_or_errno(L, umount(dest));
@@ -877,6 +881,7 @@ static const struct luaL_Reg lualinuxlib[] = {
 	{"geteuid", ll_geteuid},
 	{"getegid", ll_getegid},
 	{"errno", ll_errno},
+	{"strerror", ll_strerror},
 	{"chdir", ll_chdir},
 	{"getcwd", ll_getcwd},
 	{"setenv", ll_setenv},
