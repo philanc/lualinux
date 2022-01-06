@@ -492,6 +492,14 @@ static int ll_chmod(lua_State *L) {
 	return int_or_errno(L, chmod(pname, mode));
 }
 
+static int ll_link(lua_State *L) {
+	// lua api:  link(target, linkpath) => true | nil, errno
+	//
+	const char *target = luaL_checkstring(L, 1);
+	const char *linkpath = luaL_checkstring(L, 2);
+	return int_or_errno(L, link(target, linkpath));
+}
+
 static int ll_symlink(lua_State *L) {
 	// lua api:  symlink(target, linkpath) => true | nil, errno
 	//
@@ -915,6 +923,7 @@ static const struct luaL_Reg lualinuxlib[] = {
 	{"utime", ll_utime},
 	{"chown", ll_chown},
 	{"chmod", ll_chmod},
+	{"link", ll_link},
 	{"symlink", ll_symlink},
 	{"mkdir", ll_mkdir},
 	{"rmdir", ll_rmdir},
