@@ -828,7 +828,7 @@ static int ll_getaddrinfo(lua_State *L) {
 	// if error, return nil, errcode (EAI_* values defined in netdb.h)
 	const char *host = luaL_checkstring(L, 1);
 	const char *service = luaL_checkstring(L, 2);
-	int flags = luaL_optinteger(L, 2, 0);
+	int flags = luaL_optinteger(L, 3, 0);
 	struct addrinfo hints;
 	struct addrinfo *result, *rp;	
 	memset(&hints, 0, sizeof(struct addrinfo));
